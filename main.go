@@ -1,30 +1,33 @@
 package main
-
-import(
-	routes "github.com/mounikavari9/Golang-jwt/routes"
+import (
 	"os"
 	"github.com/gin-gonic/gin"
+	"github.com/mounikavari9/Golang-jwt/routes"
 )
 
 func main(){
 	port := os.Getenv("PORT")
+
 	if port == ""{
-		port= "8000"
+		port="8000"
 	}
 
-	router:= gin.New()
+	router := gin.New()
 	router.Use(gin.Logger())
 
 	routes.AuthRoutes(router)
 	routes.UserRoutes(router)
 
 	router.GET("/api-1", func(c *gin.Context){
-		c.JSON(200, gin.H{"success":"Access granted for api-1"})
+		c.JSON(200, gin.H{"success": "Acess granted for api-1"})
 	})
 
 	router.GET("/api-2", func(c *gin.Context){
-		c.JSON(200, gin.H{"success":"Access granted for api-2"})
+		c.JSON(200, gin.H{"success":"Acess granted for api-2"})
 	})
 
-	router.Run(":" + port)
+	router.RUN(":" + port)
+
+
+
 }
